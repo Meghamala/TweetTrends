@@ -1,7 +1,4 @@
-# Ttrend application
+# TweetTrend application
 
-This is a small applicaiton which contains main and test folders.  
-Main contains application code.  
-Test contains test cases.  
-It also contains pom.xml which has all dependences and artfact name and version
+Small Scale SpringBoot application on tweet trends for the github repository.
 
