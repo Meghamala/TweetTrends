@@ -14,7 +14,7 @@ environment{
 //                 git 'https://github.com/Meghamala/TweetTrends.git'
 //             }
 //         }
-            stage('build'){
+            stage("build"){
                 steps{
                     sh 'mvn clean deploy'
                 }
