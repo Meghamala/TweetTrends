@@ -13,12 +13,7 @@ environment{
             steps{
                 sh 'mvn clean deploy'
                 }
-
-//         stage('Clone-code') {
-//             steps {
-//                 git 'https://github.com/Meghamala/TweetTrends.git'
-//             }
-//         }
+            }
 
            stage('SonarQube analysis') {
            environment{
