@@ -1,4 +1,6 @@
 def registry = 'https://tweet14.jfrog.io'
+def imageName = 'tweet14.jfrog.io/ttrend-docker-local/ttrend'
+def version   = '0.0.1-SNAPSHOT'
 pipeline {
     agent {
         node{
@@ -73,6 +75,38 @@ environment{
                    }
                }
            }
+
+        stage(" Docker Build ") {
+      steps {
+        script {
+           echo '<--------------- Docker Build Started --------------->'
+           app = docker.build(imageName+":"+version)
+           echo '<--------------- Docker Build Ends --------------->'
+        }
+      }
+    }
+
+            stage (" Docker Publish "){
+        steps {
+            script {
+               echo '<--------------- Docker Publish Started --------------->'  
+                docker.withRegistry(registry, 'artifact-cred'){
+                    app.push()
+                }    
+               echo '<--------------- Docker Publish Ended --------------->'  
+            }
+        }
+    }
+
+stage(" Deploy ") {
+       steps {
+         script {
+            echo '<--------------- Helm Deploy Started --------------->'
+            sh 'helm install ttrend ttrend-1.0.1.tgz'
+            echo '<--------------- Helm deploy Ends --------------->'
+         }
+       }
+     }  
 
 
     }
